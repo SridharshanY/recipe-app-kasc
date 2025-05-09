@@ -8,6 +8,6 @@ export const mealLoader = async ({ params }) => {
     if (!meal) throw new Error("Meal not found");
     return meal;
   } catch (error) {
-    throw new Response("Meal not found", { status: 404 });
+    throw new Response("Meal not found", { status: 404 }, {message: error});
   }
 };
