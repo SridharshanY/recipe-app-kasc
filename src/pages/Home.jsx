@@ -1,7 +1,8 @@
 import { Search } from "@mui/icons-material";
-import { Box, IconButton, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, IconButton, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [ingredient, setIngredient] = useState("");
@@ -42,19 +43,31 @@ const Home = () => {
         />
       </Box>
 
-      <Box>
+      <Container sx={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', rowGap: 2}}>
         {meals && meals.length > 0 ? (
           meals.map((meal) => (
-            <Typography key={meal.idMeal} variant="h6" gutterBottom>
-              {meal.strMeal}
-            </Typography>
+            <Card sx={{width: 345}}>
+              <CardMedia
+                component='img'
+                height="140"
+                image={meal.strMealThumb}
+                alt="Meal Image"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">{meal.strMeal}</Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" component={Link} to={meal.strYoutube}>View Video</Button>
+                <Button size="small" component={Link} to={`/details/${meal.idMeal}`}>View Recipe</Button>
+              </CardActions>
+            </Card>
           ))
         ) : meals && meals.length === 0 ? (
           <Typography variant="h6" color="text.secondary">
             No meals found.
           </Typography>
         ) : null}
-      </Box>
+      </Container>
     </Box>
   );
 };

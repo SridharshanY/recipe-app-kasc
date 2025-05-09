@@ -4,6 +4,8 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar";
 import AppLayout from "./AppLayout";
+import RecipeDetails from "./pages/RecipeDetails";
+import { mealLoader } from "./loaders/mealLoader";
 
 const App = () => {
 
@@ -23,7 +25,12 @@ const App = () => {
         {
           path: '/contact',
           element: <Contact/>
-        }    
+        },
+        {
+          path: '/details/:id',
+          element: <RecipeDetails/>,
+          loader: mealLoader
+        }
       ]
     }
   ])
